@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EM Masajes Estepona &amp; Massage at Home | Masajes y Bienestar</title>
+    <meta name="description" content="Masajes personalizados y terapias holísticas en consulta en Estepona (Cancelada) o a domicilio en Estepona, Benahavís y Marbella. Reserva fácil por WhatsApp.">
+
+    <!-- Google Fonts: Cormorant Garamond (Headings) & Plus Jakarta Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF8F5',
+                        sand: '#F2EDE4',
+                        sage: {
+                            DEFAULT: '#2C3E35',
+                            muted: '#4A6356',
+                            light: '#E8EFEA',
+                            dark: '#1E2B24',
+                        },
+                        gold: {
+                            DEFAULT: '#C2A378',
+                            light: '#D8C29F',
+                            dark: '#A38356',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(44, 62, 53, 0.08)',
+                        'card': '0 4px 24px -4px rgba(44, 62, 53, 0.06)',
+                        'gold': '0 12px 32px -8px rgba(194, 163, 120, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Minimal custom styles for reveal animations and glassmorphism -->
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #2C3E35;
+            overflow-x: hidden;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.86);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .gift-card-shine {
+            background: linear-gradient(135deg, #2C3E35 0%, #23332B 52%, #1C2922 100%);
+        }
+        /* Smooth fade when switching tabs */
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .service-card-anim {
+            animation: fadeInCard 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold/30 selection:text-sage">
+
+    <!-- =========================================================
+         NAVIGATION BAR (Sticky Glassmorphism + Language Switcher)
+    ========================================================== -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-sage/10 transition-shadow duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#inicio" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="w-10 h-10 rounded-full bg-sage text-cream flex items-center justify-center font-serif text-xl font-semibold tracking-wider border border-gold/40 group-hover:bg-sage-muted transition-colors">
+                        EM
+                    </div>
+                    <div class="leading-tight">
+                        <span class="block font-serif text-xl sm:text-2xl font-semibold tracking-wide text-sage">EM Masajes</span>
+                        <span class="block text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-sage-muted">Estepona &amp; At Home</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-sage/85">
+                    <a href="#inicio" class="hover:text-gold-dark transition-colors" data-i18n="nav_home">Inicio</a>
+                    <a href="#tratamientos" class="hover:text-gold-dark transition-colors" data-i18n="nav_services">Tratamientos</a>
+                    <a href="#domicilio" class="hover:text-gold-dark transition-colors" data-i18n="nav_athome">A Domicilio</a>
+                    <a href="#tarjeta-regalo" class="hover:text-gold-dark transition-colors" data-i18n="nav_gift">Tarjeta Regalo</a>
+                    <a href="#contacto" class="hover:text-gold-dark transition-colors" data-i18n="nav_contact">Contacto</a>
+                </nav>
+
+                <!-- Right Controls: Language Switcher + CTA + Mobile Menu Button -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Language Switcher (ES / EN) -->
+                    <div class="inline-flex items-center bg-sand/90 p-1 rounded-full border border-sage/10" role="group" aria-label="Selector de idioma">
+                        <button type="button" id="btn-lang-es" onclick="setLanguage('es')" class="px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 bg-sage text-cream shadow-sm">
+                            ES
+                        </button>
+                        <button type="button" id="btn-lang-en" onclick="setLanguage('en')" class="px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 text-sage/70 hover:text-sage">
+                            EN
+                        </button>
+                    </div>
+
+                    <!-- Desktop Book CTA -->
+                    <a href="#" id="nav-wa-btn" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-sage text-cream text-sm font-medium hover:bg-sage-muted transition-all shadow-sm hover:shadow-md">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.031 2C6.504 2 2.01 6.494 2.01 12.021c0 1.766.462 3.49 1.339 5.012L2 22l5.106-1.339a9.975 9.975 0 0 0 4.925 1.298h.004c5.526 0 10.02-4.494 10.02-10.021C22.055 6.412 17.558 2 12.031 2zm5.828 14.186c-.245.69-1.434 1.32-1.99 1.404-.51.076-1.172.108-1.894-.122-.441-.141-1.007-.328-1.734-.642-3.054-1.319-5.048-4.417-5.2-4.62-.152-.202-1.242-1.653-1.242-3.153 0-1.5.786-2.238 1.064-2.541.279-.304.608-.38.811-.38.202 0 .405.002.583.011.187.009.438-.071.685.524.253.608.862 2.106.938 2.258.076.152.126.329.025.531-.101.202-.152.329-.304.506-.152.177-.32.396-.456.532-.152.152-.31.317-.133.621.177.304.788 1.3 1.692 2.106 1.163 1.037 2.143 1.358 2.447 1.51.304.152.481.126.659-.076.177-.202.76-.887.962-1.191.202-.304.405-.253.684-.152.279.101 1.773.836 2.077.988.304.152.506.228.582.354.076.127.076.735-.169 1.425z"/></svg>
+                        <span data-i18n="nav_book">Reservar</span>
+                    </a>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button type="button" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" class="lg:hidden p-2.5 rounded-xl text-sage hover:bg-sand transition-colors focus:outline-none">
+                        <svg id="icon-hamburger" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-cream/95 border-t border-sage/10 shadow-soft">
+            <div class="px-4 pt-3 pb-6 space-y-2">
+                <a href="#inicio" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-sage hover:bg-sand transition-colors" data-i18n="nav_home">Inicio</a>
+                <a href="#tratamientos" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-sage hover:bg-sand transition-colors" data-i18n="nav_services">Tratamientos</a>
+                <a href="#domicilio" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-sage hover:bg-sand transition-colors" data-i18n="nav_athome">A Domicilio</a>
+                <a href="#tarjeta-regalo" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-sage hover:bg-sand transition-colors" data-i18n="nav_gift">Tarjeta Regalo</a>
+                <a href="#contacto" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-sage hover:bg-sand transition-colors" data-i18n="nav_contact">Contacto</a>
+                <div class="pt-3 border-t border-sage/10">
+                    <a href="#" id="mobile-wa-btn" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-sage text-cream font-medium shadow-sm">
+                        <span data-i18n="hero_cta_primary">Reservar por WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========================================================
+             1. HERO SECTION
+        ========================================================== -->
+        <section id="inicio" class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-28 overflow-hidden">
+            <!-- Subtle Organic Botanical Background Accents -->
+            <div class="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gold/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute bottom-0 -left-24 w-80 h-80 rounded-full bg-sage/5 blur-3xl"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                    <!-- Hero Copy -->
+                    <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-light/80 border border-sage/10 text-sage-muted text-xs sm:text-sm font-medium tracking-wide">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span data-i18n="hero_badge">En Consulta en Cancelada &amp; A Domicilio</span>
+                        </div>
+
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-sage leading-[1.12] tracking-tight" data-i18n="hero_title">
+                            Masajes y Bienestar en Estepona, Benahavís y Marbella
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-sage-muted/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light" data-i18n="hero_subtitle">
+                            Masajes personalizados y tratamientos holísticos en nuestra consulta de Estepona o en la comodidad de tu hogar, villa u hotel.
+                        </p>
+
+                        <!-- Hero CTAs -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#" id="hero-wa-btn" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-sage text-cream font-medium text-base hover:bg-sage-muted transition-all duration-300 shadow-soft hover:shadow-lg hover:-translate-y-0.5">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.031 2C6.504 2 2.01 6.494 2.01 12.021c0 1.766.462 3.49 1.339 5.012L2 22l5.106-1.339a9.975 9.975 0 0 0 4.925 1.298h.004c5.526 0 10.02-4.494 10.02-10.021C22.055 6.412 17.558 2 12.031 2zm5.828 14.186c-.245.69-1.434 1.32-1.99 1.404-.51.076-1.172.108-1.894-.122-.441-.141-1.007-.328-1.734-.642-3.054-1.319-5.048-4.417-5.2-4.62-.152-.202-1.242-1.653-1.242-3.153 0-1.5.786-2.238 1.064-2.541.279-.304.608-.38.811-.38.202 0 .405.002.583.011.187.009.438-.071.685.524.253.608.862 2.106.938 2.258.076.152.126.329.025.531-.101.202-.152.329-.304.506-.152.177-.32.396-.456.532-.152.152-.31.317-.133.621.177.304.788 1.3 1.692 2.106 1.163 1.037 2.143 1.358 2.447 1.51.304.152.481.126.659-.076.177-.202.76-.887.962-1.191.202-.304.405-.253.684-.152.279.101 1.773.836 2.077.988.304.152.506.228.582.354.076.127.076.735-.169 1.425z"/></svg>
+                                <span data-i18n="hero_cta_primary">Reservar por WhatsApp</span>
+                            </a>
+                            <a href="#tratamientos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-transparent border border-sage/25 text-sage font-medium text-base hover:bg-sand hover:border-sage/40 transition-all duration-300">
+                                <span data-i18n="hero_cta_secondary">Ver Tratamientos</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </a>
+                        </div>
+
+                        <!-- Trust Highlights -->
+                        <div class="pt-6 border-t border-sage/10 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
+                            <div>
+                                <p class="font-serif text-2xl sm:text-3xl font-semibold text-sage">23+</p>
+                                <p class="text-xs text-sage-muted mt-0.5" data-i18n="stat_treatments">Tratamientos y terapias</p>
+                            </div>
+                            <div>
+                                <p class="font-serif text-2xl sm:text-3xl font-semibold text-sage">ES / EN</p>
+                                <p class="text-xs text-sage-muted mt-0.5" data-i18n="stat_bilingual">Atención bilingüe</p>
+                            </div>
+                            <div>
+                                <p class="font-serif text-2xl sm:text-3xl font-semibold text-sage">100%</p>
+                                <p class="text-xs text-sage-muted mt-0.5" data-i18n="stat_custom">Sesiones a medida</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Composition -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative rounded-3xl overflow-hidden shadow-soft border border-gold/25 bg-sand aspect-[4/5] max-w-md mx-auto">
+                            <img
+                                src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=85"
+                                alt="Sesión de masaje relajante en EM Masajes Estepona"
+                                class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1000/2C3E35/FAF8F5?text=EM+Masajes+Estepona';"
+                            >
+                            <!-- Soft Bottom Gradient Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-sage/70 via-sage/10 to-transparent"></div>
+                            <!-- Floating Glass Badge -->
+                            <div class="absolute bottom-5 left-5 right-5 rounded-2xl bg-cream/90 backdrop-blur-md p-4 border border-white/60 shadow-card">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-gold/20 text-gold-dark flex items-center justify-center shrink-0">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-semibold uppercase tracking-wider text-gold-dark" data-i18n="hero_card_label">Costa del Sol</p>
+                                        <p class="text-sm font-medium text-sage" data-i18n="hero_card_text">Estepona · Cancelada · Benahavís · Marbella</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Decorative Gold Outline Frame -->
+                        <div class="hidden sm:block pointer-events-none absolute -bottom-4 -right-4 w-40 h-40 rounded-3xl border border-gold/40 -z-10"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             2. INTERACTIVE SERVICES SECTION (3 Category Filter Tabs)
+        ========================================================== -->
+        <section id="tratamientos" class="py-20 sm:py-28 bg-sand/60 border-y border-sage/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                    <span class="text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark" data-i18n="services_eyebrow">Carta de Bienestar</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-sage mt-2" data-i18n="services_title">Nuestros Tratamientos y Terapias</h2>
+                    <p class="text-sage-muted mt-4 text-base sm:text-lg font-light" data-i18n="services_subtitle">
+                        Elige la categoría que mejor se adapte a ti y consulta disponibilidad al instante por WhatsApp.
+                    </p>
+                </div>
+
+                <!-- Category Filter Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-12 reveal" role="tablist" aria-label="Categorías de servicios">
+                    <button type="button" role="tab" id="tab-clinic" onclick="selectCategory('clinic')" class="tab-btn px-5 sm:px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-sage text-cream shadow-soft">
+                        <span data-i18n="tab_clinic">En Consulta y a Domicilio</span>
+                        <span class="ml-1.5 text-xs opacity-75">(9)</span>
+                    </button>
+                    <button type="button" role="tab" id="tab-home" onclick="selectCategory('home')" class="tab-btn px-5 sm:px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-cream text-sage border border-sage/15 hover:border-gold">
+                        <span data-i18n="tab_home">Exclusivos a Domicilio</span>
+                        <span class="ml-1.5 text-xs opacity-75">(6)</span>
+                    </button>
+                    <button type="button" role="tab" id="tab-complementary" onclick="selectCategory('complementary')" class="tab-btn px-5 sm:px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-cream text-sage border border-sage/15 hover:border-gold">
+                        <span data-i18n="tab_complementary">Terapias Complementarias</span>
+                        <span class="ml-1.5 text-xs opacity-75">(8)</span>
+                    </button>
+                </div>
+
+                <!-- Dynamic Services Grid -->
+                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Rendered dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             3. AT-HOME SERVICE HIGHLIGHT SECTION
+        ========================================================== -->
+        <section id="domicilio" class="py-20 sm:py-28 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-sage rounded-3xl p-8 sm:p-12 lg:p-16 text-cream relative overflow-hidden shadow-soft reveal">
+                    <!-- Subtle Botanical Watermark SVG -->
+                    <svg class="pointer-events-none absolute -right-16 -bottom-16 w-80 h-80 text-gold/10" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+                        <path d="M100 10C130 45 155 85 155 130C155 165 130 190 100 190C70 190 45 165 45 130C45 85 70 45 100 10ZM100 38C82 68 65 98 65 130C65 152 80 170 100 170C120 170 135 152 135 130C135 98 118 68 100 38Z"/>
+                    </svg>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-gold-light" data-i18n="athome_eyebrow">Bienestar sin desplazamientos</span>
+                            <h2 class="font-serif text-3xl sm:text-5xl font-semibold leading-tight" data-i18n="athome_title">
+                                Llevamos la experiencia de spa a tu hogar o villa
+                            </h2>
+                            <p class="text-cream/85 text-base sm:text-lg leading-relaxed font-light" data-i18n="athome_desc">
+                                En EM Masajes Estepona colaboramos con profesionales locales de confianza para ofrecer masajes individuales, en pareja o para grupos directamente en tu vivienda, villa vacacional u hotel en Estepona, Cancelada, Benahavís y Marbella.
+                            </p>
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <span class="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm font-medium text-cream">Estepona</span>
+                                <span class="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm font-medium text-cream">Cancelada</span>
+                                <span class="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm font-medium text-cream">Benahavís</span>
+                                <span class="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm font-medium text-cream">Marbella</span>
+                            </div>
+                            <div class="pt-3">
+                                <a href="#" id="athome-wa-btn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-gold text-sage-dark font-semibold text-sm sm:text-base hover:bg-gold-light transition-all shadow-gold">
+                                    <span data-i18n="athome_cta">Solicitar masaje a domicilio</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 3 Feature Cards inside At-Home Banner -->
+                        <div class="lg:col-span-5 grid grid-cols-1 gap-4">
+                            <div class="rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
+                                <h3 class="font-serif text-xl font-semibold text-gold-light" data-i18n="athome_feat1_title">Sesiones Individuales</h3>
+                                <p class="text-sm text-cream/80 mt-1 font-light" data-i18n="athome_feat1_desc">Llevamos camilla profesional, aceites esenciales y todo lo necesario para desconectar sin salir de casa.</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
+                                <h3 class="font-serif text-xl font-semibold text-gold-light" data-i18n="athome_feat2_title">Masajes en Pareja</h3>
+                                <p class="text-sm text-cream/80 mt-1 font-light" data-i18n="athome_feat2_desc">Dos terapeutas de forma simultánea para compartir un momento inolvidable de calma y conexión.</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm">
+                                <h3 class="font-serif text-xl font-semibold text-gold-light" data-i18n="athome_feat3_title">Grupos, Villas y Eventos</h3>
+                                <p class="text-sm text-cream/80 mt-1 font-light" data-i18n="athome_feat3_desc">Coordinamos varios profesionales para retiros, escapadas de amigas, celebraciones o estancias en villas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             4. GIFT CARD (TARJETA REGALO) SECTION
+        ========================================================== -->
+        <section id="tarjeta-regalo" class="py-16 sm:py-24 bg-sand/50 border-y border-sage/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal">
+                    <!-- Stylish CSS Luxury Gift Card Mockup -->
+                    <div class="lg:col-span-6 flex justify-center">
+                        <div class="relative w-full max-w-md group">
+                            <!-- Soft Glow -->
+                            <div class="absolute -inset-2 rounded-3xl bg-gradient-to-r from-gold/30 via-sage/20 to-gold/30 blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <!-- Card Surface -->
+                            <div class="relative gift-card-shine rounded-3xl p-7 sm:p-9 text-cream border border-gold/40 shadow-soft aspect-[1.6/1] flex flex-col justify-between overflow-hidden transform transition-transform duration-500 group-hover:-translate-y-1">
+                                <!-- Decorative Corner Frame -->
+                                <div class="pointer-events-none absolute inset-3.5 rounded-2xl border border-gold/25"></div>
+
+                                <div class="flex items-start justify-between relative z-10">
+                                    <div>
+                                        <p class="text-[10px] sm:text-xs uppercase tracking-[0.26em] text-gold-light" data-i18n="gift_card_tag">Bono Regalo</p>
+                                        <p class="font-serif text-2xl sm:text-3xl font-semibold tracking-wide mt-0.5">EM Masajes</p>
+                                    </div>
+                                    <div class="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center font-serif text-gold-light text-lg">
+                                        EM
+                                    </div>
+                                </div>
+
+                                <div class="relative z-10 my-2">
+                                    <p class="font-serif italic text-lg sm:text-xl text-gold-light/95" data-i18n="gift_card_quote">
+                                        "Regala tiempo, calma y bienestar"
+                                    </p>
+                                </div>
+
+                                <div class="flex items-end justify-between text-[11px] sm:text-xs text-cream/75 relative z-10">
+                                    <span data-i18n="gift_card_valid">Válido en consulta y a domicilio</span>
+                                    <span class="uppercase tracking-widest text-gold-light">Estepona · Marbella</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gift Card Copy -->
+                    <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                        <span class="text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark" data-i18n="gift_eyebrow">El Detalle Perfecto</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-sage leading-tight" data-i18n="gift_title">
+                            Tarjeta Regalo Personalizada
+                        </h2>
+                        <p class="text-sage-muted text-base sm:text-lg leading-relaxed font-light" data-i18n="gift_desc">
+                            Sorprende en cumpleaños, aniversarios o fechas especiales con una experiencia de relajación única. Preparamos tu bono personalizado en formato digital listo para enviar o impreso para recoger en consulta.
+                        </p>
+                        <div class="pt-2">
+                            <a href="#" id="gift-wa-btn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-sage text-cream font-medium hover:bg-sage-muted transition-all shadow-soft hover:-translate-y-0.5">
+                                <svg class="w-5 h-5 text-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+                                <span data-i18n="gift_cta">Pedir Tarjeta Regalo por WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             5. GOOGLE REVIEWS BANNER
+        ========================================================== -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+                <div class="rounded-3xl bg-cream border border-gold/30 p-8 sm:p-12 text-center shadow-card">
+                    <!-- 5 Gold Stars -->
+                    <div class="flex items-center justify-center gap-1.5 text-gold mb-4" aria-label="5 estrellas">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-sage" data-i18n="reviews_title">
+                        ¿Ya has disfrutado de tu masaje?
+                    </h2>
+                    <p class="text-sage-muted mt-3 max-w-xl mx-auto text-base font-light" data-i18n="reviews_desc">
+                        Tu opinión nos ayuda a seguir creciendo y a que más personas en Estepona encuentren su momento de bienestar.
+                    </p>
+                    <div class="mt-7">
+                        <a href="https://www.google.com/maps/search/?api=1&query=EM+Masajes+Estepona+Calle+del+Marques+del+Duero+19" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-sand hover:bg-gold/20 border border-gold/40 text-sage font-medium transition-all">
+                            <svg class="w-5 h-5 text-gold-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                            <span data-i18n="reviews_cta">Dejar una reseña en Google</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             6. CONTACT & LOCATION SECTION
+        ========================================================== -->
+        <section id="contacto" class="py-20 sm:py-28 bg-sand/60 border-t border-sage/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <span class="text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark" data-i18n="contact_eyebrow">Reserva tu Cita</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-sage mt-2" data-i18n="contact_title">Contacto y Ubicación</h2>
+                    <p class="text-sage-muted mt-3 font-light" data-i18n="contact_subtitle">
+                        Escríbenos directamente o visítanos en nuestra consulta en Cancelada, Estepona.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch reveal">
+                    <!-- Left Column: Info + Google Map -->
+                    <div class="lg:col-span-6 flex flex-col gap-6">
+                        <!-- Contact Details Card -->
+                        <div class="bg-cream rounded-3xl p-7 sm:p-8 border border-sage/10 shadow-card space-y-6">
+                            <!-- Address -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-sage-light text-sage flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xs font-semibold uppercase tracking-wider text-gold-dark" data-i18n="contact_address_label">Dirección</h3>
+                                    <p class="text-sage font-medium mt-1">Avda. Marqués del Duero, 19, Urb. Cancelada</p>
+                                    <p class="text-sage-muted text-sm">29688 Estepona (Málaga), España</p>
+                                </div>
+                            </div>
+
+                            <!-- Phone & WhatsApp -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-sage-light text-sage flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                </div>
+                                <div class="w-full">
+                                    <h3 class="text-xs font-semibold uppercase tracking-wider text-gold-dark" data-i18n="contact_phone_label">Teléfono y WhatsApp</h3>
+                                    <a href="tel:+34635047218" class="block text-xl font-serif font-semibold text-sage hover:text-gold-dark transition-colors mt-0.5">
+                                        +34 635 04 72 18
+                                    </a>
+                                    <div class="flex flex-wrap gap-3 mt-3">
+                                        <a href="tel:+34635047218" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sand text-sage text-xs font-semibold hover:bg-gold/25 transition-colors">
+                                            <span data-i18n="btn_call_now">Llamar ahora</span>
+                                        </a>
+                                        <a href="#" id="contact-wa-btn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sage text-cream text-xs font-semibold hover:bg-sage-muted transition-colors">
+                                            <span data-i18n="btn_open_wa">Abrir WhatsApp</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Embedded Google Maps -->
+                        <div class="rounded-3xl overflow-hidden border border-sage/10 shadow-card flex-1 min-h-[260px] bg-cream">
+                            <iframe
+                                title="Ubicación EM Masajes Estepona"
+                                src="https://maps.google.com/maps?q=Calle%20del%20Marqu%C3%A9s%20del%20Duero%2019,%20Estepona,%20M%C3%A1laga&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                class="w-full h-full min-h-[260px] border-0"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Zero-Backend Quick WhatsApp Inquiry Form -->
+                    <div class="lg:col-span-6">
+                        <div class="bg-cream rounded-3xl p-7 sm:p-10 border border-sage/10 shadow-card h-full flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-sage" data-i18n="form_title">Consulta rápida por WhatsApp</h3>
+                                <p class="text-sm text-sage-muted mt-2 font-light" data-i18n="form_subtitle">
+                                    Completa estos datos y se abrirá WhatsApp con tu mensaje listo para enviar.
+                                </p>
+
+                                <form id="quick-wa-form" class="mt-7 space-y-5" novalidate>
+                                    <!-- Name -->
+                                    <div>
+                                        <label for="input-name" class="block text-xs font-semibold uppercase tracking-wider text-sage-muted mb-2" data-i18n="form_name_label">Tu nombre</label>
+                                        <input
+                                            type="text"
+                                            id="input-name"
+                                            required
+                                            placeholder="Ej. Laura García"
+                                            class="w-full px-4 py-3.5 rounded-2xl bg-cream border border-sage/20 text-sage placeholder-sage/40 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/25 transition-all"
+                                        >
+                                    </div>
+
+                                    <!-- Service Dropdown -->
+                                    <div>
+                                        <label for="input-service" class="block text-xs font-semibold uppercase tracking-wider text-sage-muted mb-2" data-i18n="form_service_label">Tratamiento de interés</label>
+                                        <select
+                                            id="input-service"
+                                            class="w-full px-4 py-3.5 rounded-2xl bg-cream border border-sage/20 text-sage focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/25 transition-all"
+                                        >
+                                            <!-- Dynamically populated in current language -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Message -->
+                                    <div>
+                                        <label for="input-message" class="block text-xs font-semibold uppercase tracking-wider text-sage-muted mb-2" data-i18n="form_msg_label">Mensaje (fecha preferida, en consulta o a domicilio...)</label>
+                                        <textarea
+                                            id="input-message"
+                                            rows="4"
+                                            placeholder="Hola, me gustaría consultar disponibilidad para esta semana..."
+                                            class="w-full px-4 py-3.5 rounded-2xl bg-cream border border-sage/20 text-sage placeholder-sage/40 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/25 transition-all resize-none"
+                                        ></textarea>
+                                    </div>
+
+                                    <!-- Inline Validation Feedback (No alert()) -->
+                                    <p id="form-feedback" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5"></p>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="w-full flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-sage text-cream font-medium text-base hover:bg-sage-muted transition-all shadow-soft hover:shadow-lg">
+                                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.031 2C6.504 2 2.01 6.494 2.01 12.021c0 1.766.462 3.49 1.339 5.012L2 22l5.106-1.339a9.975 9.975 0 0 0 4.925 1.298h.004c5.526 0 10.02-4.494 10.02-10.021C22.055 6.412 17.558 2 12.031 2zm5.828 14.186c-.245.69-1.434 1.32-1.99 1.404-.51.076-1.172.108-1.894-.122-.441-.141-1.007-.328-1.734-.642-3.054-1.319-5.048-4.417-5.2-4.62-.152-.202-1.242-1.653-1.242-3.153 0-1.5.786-2.238 1.064-2.541.279-.304.608-.38.811-.38.202 0 .405.002.583.011.187.009.438-.071.685.524.253.608.862 2.106.938 2.258.076.152.126.329.025.531-.101.202-.152.329-.304.506-.152.177-.32.396-.456.532-.152.152-.31.317-.133.621.177.304.788 1.3 1.692 2.106 1.163 1.037 2.143 1.358 2.447 1.51.304.152.481.126.659-.076.177-.202.76-.887.962-1.191.202-.304.405-.253.684-.152.279.101 1.773.836 2.077.988.304.152.506.228.582.354.076.127.076.735-.169 1.425z"/></svg>
+                                        <span data-i18n="form_submit">Enviar consulta por WhatsApp</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <p class="text-xs text-sage-muted/80 mt-6 text-center" data-i18n="form_privacy_note">
+                                Respuesta rápida y trato directo. Sin intermediarios ni formularios lentos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================================
+         7. FOOTER
+    ========================================================== -->
+    <footer class="bg-sage-dark text-cream/85 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
+                <!-- Brand -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-sage text-cream flex items-center justify-center font-serif text-lg font-semibold border border-gold/40">EM</div>
+                        <span class="font-serif text-xl font-semibold text-cream">EM Masajes Estepona</span>
+                    </div>
+                    <p class="text-sm text-cream/70 font-light max-w-xs" data-i18n="footer_desc">
+                        Masajes terapéuticos, relajantes y bienestar holístico en consulta en Cancelada y a domicilio en la Costa del Sol.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light mb-4" data-i18n="footer_links_title">Navegación</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#inicio" class="hover:text-gold-light transition-colors" data-i18n="nav_home">Inicio</a></li>
+                        <li><a href="#tratamientos" class="hover:text-gold-light transition-colors" data-i18n="nav_services">Tratamientos</a></li>
+                        <li><a href="#domicilio" class="hover:text-gold-light transition-colors" data-i18n="nav_athome">A Domicilio</a></li>
+                        <li><a href="#tarjeta-regalo" class="hover:text-gold-light transition-colors" data-i18n="nav_gift">Tarjeta Regalo</a></li>
+                        <li><a href="#contacto" class="hover:text-gold-light transition-colors" data-i18n="nav_contact">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Links (Open clean modals) -->
+                <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light mb-4" data-i18n="footer_legal_title">Información Legal</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><button type="button" onclick="openLegalModal('legal')" class="hover:text-gold-light transition-colors text-left" data-i18n="legal_notice">Aviso Legal</button></li>
+                        <li><button type="button" onclick="openLegalModal('privacy')" class="hover:text-gold-light transition-colors text-left" data-i18n="legal_privacy">Política de Privacidad</button></li>
+                        <li><button type="button" onclick="openLegalModal('accessibility')" class="hover:text-gold-light transition-colors text-left" data-i18n="legal_accessibility">Declaración de Accesibilidad</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/60">
+                <p>&copy; 2026 EM Masajes Estepona &amp; Massage at Home</p>
+                <p>Avda. Marqués del Duero, 19 · 29688 Estepona (Málaga)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         FLOATING WHATSAPP BUTTON (Bottom Right)
+    ========================================================== -->
+    <a href="#" id="floating-wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" class="fixed bottom-5 right-5 z-40 group flex items-center gap-2.5 bg-[#25D366] text-white px-4 py-3.5 rounded-full shadow-lg hover:bg-[#1ebe5d] hover:scale-105 transition-all duration-300">
+        <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.031 2C6.504 2 2.01 6.494 2.01 12.021c0 1.766.462 3.49 1.339 5.012L2 22l5.106-1.339a9.975 9.975 0 0 0 4.925 1.298h.004c5.526 0 10.02-4.494 10.02-10.021C22.055 6.412 17.558 2 12.031 2zm5.828 14.186c-.245.69-1.434 1.32-1.99 1.404-.51.076-1.172.108-1.894-.122-.441-.141-1.007-.328-1.734-.642-3.054-1.319-5.048-4.417-5.2-4.62-.152-.202-1.242-1.653-1.242-3.153 0-1.5.786-2.238 1.064-2.541.279-.304.608-.38.811-.38.202 0 .405.002.583.011.187.009.438-.071.685.524.253.608.862 2.106.938 2.258.076.152.126.329.025.531-.101.202-.152.329-.304.506-.152.177-.32.396-.456.532-.152.152-.31.317-.133.621.177.304.788 1.3 1.692 2.106 1.163 1.037 2.143 1.358 2.447 1.51.304.152.481.126.659-.076.177-.202.76-.887.962-1.191.202-.304.405-.253.684-.152.279.101 1.773.836 2.077.988.304.152.506.228.582.354.076.127.076.735-.169 1.425z"/></svg>
+        <span class="hidden sm:inline text-sm font-semibold pr-1" data-i18n="float_wa">WhatsApp</span>
+    </a>
+
+    <!-- =========================================================
+         LEGAL INFO MODAL
+    ========================================================== -->
+    <div id="legal-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-sage-dark/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+        <div class="bg-cream rounded-3xl max-w-xl w-full max-h-[82vh] flex flex-col shadow-2xl border border-gold/30 overflow-hidden">
+            <div class="flex items-center justify-between px-6 py-5 border-b border-sage/10">
+                <h3 id="legal-modal-title" class="font-serif text-2xl font-semibold text-sage"></h3>
+                <button type="button" onclick="closeLegalModal()" aria-label="Cerrar" class="p-2 rounded-full text-sage-muted hover:bg-sand transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="legal-modal-body" class="p-6 overflow-y-auto text-sm text-sage-muted leading-relaxed space-y-4">
+                <!-- Dynamic legal content -->
+            </div>
+            <div class="px-6 py-4 bg-sand/50 border-t border-sage/10 flex justify-end">
+                <button type="button" onclick="closeLegalModal()" class="px-6 py-2.5 rounded-full bg-sage text-cream text-sm font-medium hover:bg-sage-muted transition-colors" data-i18n="modal_close">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         APPLICATION JAVASCRIPT (Bilingual State, Services, WhatsApp)
+    ========================================================== -->
+    <script>
+        // Core contact constants
+        const WHATSAPP_NUMBER = '34635047218';
+
+        // Current UI state
+        let currentLang = 'es';
+        let currentCategory = 'clinic';
+
+        /**
+         * Complete bilingual dictionary for all UI text and pre-filled WhatsApp messages
+         */
+        const TRANSLATIONS = {
+            es: {
+                page_title: 'EM Masajes Estepona & Massage at Home | Masajes y Bienestar',
+                nav_home: 'Inicio',
+                nav_services: 'Tratamientos',
+                nav_athome: 'A Domicilio',
+                nav_gift: 'Tarjeta Regalo',
+                nav_contact: 'Contacto',
+                nav_book: 'Reservar',
+
+                hero_badge: 'En Consulta en Cancelada & A Domicilio',
+                hero_title: 'Masajes y Bienestar en Estepona, Benahavís y Marbella',
+                hero_subtitle: 'Masajes personalizados y tratamientos holísticos en nuestra consulta de Estepona o en la comodidad de tu hogar, villa u hotel.',
+                hero_cta_primary: 'Reservar por WhatsApp',
+                hero_cta_secondary: 'Ver Tratamientos',
+                stat_treatments: 'Tratamientos y terapias',
+                stat_bilingual: 'Atención bilingüe',
+                stat_custom: 'Sesiones a medida',
+                hero_card_label: 'Costa del Sol',
+                hero_card_text: 'Estepona · Cancelada · Benahavís · Marbella',
+
+                services_eyebrow: 'Carta de Bienestar',
+                services_title: 'Nuestros Tratamientos y Terapias',
+                services_subtitle: 'Elige la categoría que mejor se adapte a ti y consulta disponibilidad al instante por WhatsApp.',
+                tab_clinic: 'En Consulta y a Domicilio',
+                tab_home: 'Exclusivos a Domicilio',
+                tab_complementary: 'Terapias Complementarias',
+                card_cta: 'Consultar por WhatsApp',
+
+                athome_eyebrow: 'Bienestar sin desplazamientos',
+                athome_title: 'Llevamos la experiencia de spa a tu hogar o villa',
+                athome_desc: 'En EM Masajes Estepona colaboramos con profesionales locales de confianza para ofrecer masajes individuales, en pareja o para grupos directamente en tu vivienda, villa vacacional u hotel en Estepona, Cancelada, Benahavís y Marbella.',
+                athome_cta: 'Solicitar masaje a domicilio',
+                athome_feat1_title: 'Sesiones Individuales',
+                athome_feat1_desc: 'Llevamos camilla profesional, aceites esenciales y todo lo necesario para desconectar sin salir de casa.',
+                athome_feat2_title: 'Masajes en Pareja',
+                athome_feat2_desc: 'Dos terapeutas de forma simultánea para compartir un momento inolvidable de calma y conexión.',
+                athome_feat3_title: 'Grupos, Villas y Eventos',
+                athome_feat3_desc: 'Coordinamos varios profesionales para retiros, escapadas de amigas, celebraciones o estancias en villas.',
+
+                gift_card_tag: 'Bono Regalo',
+                gift_card_quote: '"Regala tiempo, calma y bienestar"',
+                gift_card_valid: 'Válido en consulta y a domicilio',
+                gift_eyebrow: 'El Detalle Perfecto',
+                gift_title: 'Tarjeta Regalo Personalizada',
+                gift_desc: 'Sorprende en cumpleaños, aniversarios o fechas especiales con una experiencia de relajación única. Preparamos tu bono personalizado en formato digital listo para enviar o impreso para recoger en consulta.',
+                gift_cta: 'Pedir Tarjeta Regalo por WhatsApp',
+
+                reviews_title: '¿Ya has disfrutado de tu masaje?',
+                reviews_desc: 'Tu opinión nos ayuda a seguir creciendo y a que más personas en Estepona encuentren su momento de bienestar.',
+                reviews_cta: 'Dejar una reseña en Google',
+
+                contact_eyebrow: 'Reserva tu Cita',
+                contact_title: 'Contacto y Ubicación',
+                contact_subtitle: 'Escríbenos directamente o visítanos en nuestra consulta en Cancelada, Estepona.',
+                contact_address_label: 'Dirección',
+                contact_phone_label: 'Teléfono y WhatsApp',
+                btn_call_now: 'Llamar ahora',
+                btn_open_wa: 'Abrir WhatsApp',
+
+                form_title: 'Consulta rápida por WhatsApp',
+                form_subtitle: 'Completa estos datos y se abrirá WhatsApp con tu mensaje listo para enviar.',
+                form_name_label: 'Tu nombre',
+                form_name_placeholder: 'Ej. Laura García',
+                form_service_label: 'Tratamiento de interés',
+                form_service_general: 'Consulta general / Asesoramiento',
+                form_msg_label: 'Mensaje (fecha preferida, en consulta o a domicilio...)',
+                form_msg_placeholder: 'Hola, me gustaría consultar disponibilidad para esta semana...',
+                form_submit: 'Enviar consulta por WhatsApp',
+                form_privacy_note: 'Respuesta rápida y trato directo. Sin intermediarios ni formularios lentos.',
+                form_err_name: 'Por favor, indica tu nombre antes de enviar la consulta.',
+
+                footer_desc: 'Masajes terapéuticos, relajantes y bienestar holístico en consulta en Cancelada y a domicilio en la Costa del Sol.',
+                footer_links_title: 'Navegación',
+                footer_legal_title: 'Información Legal',
+                legal_notice: 'Aviso Legal',
+                legal_privacy: 'Política de Privacidad',
+                legal_accessibility: 'Declaración de Accesibilidad',
+                float_wa: 'WhatsApp',
+                modal_close: 'Cerrar',
+
+                // WhatsApp pre-filled templates
+                wa_general: 'Hola, me gustaría consultar disponibilidad y reservar una cita en EM Masajes Estepona.',
+                wa_athome: 'Hola, me interesa solicitar información para un masaje a domicilio (Estepona / Cancelada / Benahavís / Marbella).',
+                wa_gift: 'Hola, me gustaría solicitar una Tarjeta Regalo personalizada de EM Masajes Estepona.',
+                wa_service_prefix: 'Hola, me gustaría consultar disponibilidad y precio para: '
+            },
+            en: {
+                page_title: 'EM Masajes Estepona & Massage at Home | Massages & Wellness',
+                nav_home: 'Home',
+                nav_services: 'Treatments',
+                nav_athome: 'At Home',
+                nav_gift: 'Gift Card',
+                nav_contact: 'Contact',
+                nav_book: 'Book Now',
+
+                hero_badge: 'Estepona Clinic & At-Home Service',
+                hero_title: 'Massages & Wellness in Estepona, Benahavís & Marbella',
+                hero_subtitle: 'Personalized massages and holistic treatments in our Estepona clinic or in the comfort of your home, villa, or hotel.',
+                hero_cta_primary: 'Book via WhatsApp',
+                hero_cta_secondary: 'View Treatments',
+                stat_treatments: 'Treatments & therapies',
+                stat_bilingual: 'Bilingual care',
+                stat_custom: 'Tailored sessions',
+                hero_card_label: 'Costa del Sol',
+                hero_card_text: 'Estepona · Cancelada · Benahavís · Marbella',
+
+                services_eyebrow: 'Wellness Menu',
+                services_title: 'Our Treatments & Therapies',
+                services_subtitle: 'Choose a category below and check availability instantly via WhatsApp.',
+                tab_clinic: 'In Clinic & At Home',
+                tab_home: 'At-Home Exclusives',
+                tab_complementary: 'Complementary Therapies',
+                card_cta: 'Book via WhatsApp',
+
+                athome_eyebrow: 'Effortless Relaxation',
+                athome_title: 'We bring the boutique spa experience to your home or villa',
+                athome_desc: 'At EM Masajes Estepona, we collaborate with trusted local professionals to offer individual, couples, or group massages directly at your home, holiday villa, or hotel in Estepona, Cancelada, Benahavís, and Marbella.',
+                athome_cta: 'Request an at-home massage',
+                athome_feat1_title: 'Individual Sessions',
+                athome_feat1_desc: 'We bring a professional massage table, essential oils, and everything needed so you can unwind at home.',
+                athome_feat2_title: 'Couples Massages',
+                athome_feat2_desc: 'Two therapists working simultaneously so you and your partner can share a memorable moment of calm.',
+                athome_feat3_title: 'Groups, Villas & Events',
+                athome_feat3_desc: 'We coordinate multiple therapists for retreats, group getaways, celebrations, or villa stays.',
+
+                gift_card_tag: 'Gift Voucher',
+                gift_card_quote: '"Give the gift of time, calm & wellness"',
+                gift_card_valid: 'Valid in clinic & at home',
+                gift_eyebrow: 'A Thoughtful Present',
+                gift_title: 'Personalized Gift Card',
+                gift_desc: 'Surprise someone special for birthdays, anniversaries, or holidays with a bespoke relaxation experience. Available as an instant digital voucher or a printed card ready for clinic pickup.',
+                gift_cta: 'Request Gift Card via WhatsApp',
+
+                reviews_title: 'Have you enjoyed a session with us?',
+                reviews_desc: 'Your feedback means the world to us and helps others in Estepona discover their moment of wellbeing.',
+                reviews_cta: 'Leave a Google Review',
+
+                contact_eyebrow: 'Book Your Session',
+                contact_title: 'Contact & Location',
+                contact_subtitle: 'Message us directly or visit our clinic in Cancelada, Estepona.',
+                contact_address_label: 'Address',
+                contact_phone_label: 'Phone & WhatsApp',
+                btn_call_now: 'Call now',
+                btn_open_wa: 'Open WhatsApp',
+
+                form_title: 'Quick WhatsApp Inquiry',
+                form_subtitle: 'Fill in your details and WhatsApp will open with your formatted message ready to send.',
+                form_name_label: 'Your name',
+                form_name_placeholder: 'e.g. Sarah Mitchell',
+                form_service_label: 'Treatment of interest',
+                form_service_general: 'General inquiry / Recommendation',
+                form_msg_label: 'Message (preferred date, in clinic or at home...)',
+                form_msg_placeholder: 'Hello, I would like to check availability for this week...',
+                form_submit: 'Send Inquiry via WhatsApp',
+                form_privacy_note: 'Fast, direct response. No middlemen or slow contact forms.',
+                form_err_name: 'Please enter your name before sending your inquiry.',
+
+                footer_desc: 'Therapeutic massages, relaxation, and holistic wellness in our Cancelada clinic and at home across the Costa del Sol.',
+                footer_links_title: 'Navigation',
+                footer_legal_title: 'Legal Information',
+                legal_notice: 'Legal Notice',
+                legal_privacy: 'Privacy Policy',
+                legal_accessibility: 'Accessibility Statement',
+                float_wa: 'WhatsApp',
+                modal_close: 'Close',
+
+                // WhatsApp pre-filled templates
+                wa_general: 'Hello, I would like to check availability and book an appointment at EM Masajes Estepona.',
+                wa_athome: 'Hello, I would like information about booking an at-home massage in Estepona / Cancelada / Benahavís / Marbella.',
+                wa_gift: 'Hello, I would like to request a personalized Gift Card from EM Masajes Estepona.',
+                wa_service_prefix: 'Hello, I would like to check availability and pricing for: '
+            }
+        };
+
+        /**
+         * Complete 23 Services Data organized into the 3 required categories
+         */
+        const SERVICES_DATA = {
+            clinic: [
+                {
+                    es: { title: 'Masaje Craneofacial', desc: 'Libera la tensión cervical, mandibular y el estrés acumulado en cabeza y rostro.' },
+                    en: { title: 'Craniofacial Massage', desc: 'Releases neck, jaw, and facial tension while easing headaches and mental fatigue.' }
+                },
+                {
+                    es: { title: 'Masaje Deportivo', desc: 'Prepara la musculatura, previene lesiones y acelera la recuperación física.' },
+                    en: { title: 'Sports Massage', desc: 'Prepares muscles, prevents injuries, and speeds up post-workout recovery.' }
+                },
+                {
+                    es: { title: 'Masaje para Embarazadas', desc: 'Alivia la sobrecarga lumbar y mejora la circulación con técnicas suaves y seguras.' },
+                    en: { title: 'Prenatal Massage', desc: 'Eases lower back discomfort and improves circulation with gentle, safe techniques.' }
+                },
+                {
+                    es: { title: 'Masaje de Piernas Cansadas', desc: 'Reactiva la circulación venosa y aporta una sensación inmediata de ligereza.' },
+                    en: { title: 'Tired Legs Massage', desc: 'Stimulates circulation and brings immediate relief and lightness to heavy legs.' }
+                },
+                {
+                    es: { title: 'Masaje Relajante', desc: 'Desconexión profunda cuerpo y mente mediante maniobras fluidas y aromáticas.' },
+                    en: { title: 'Relaxing Massage', desc: 'Deep body-and-mind unwinding through slow, flowing, aromatic strokes.' }
+                },
+                {
+                    es: { title: 'Masaje Tailandés', desc: 'Estiramientos asistidos y presiones precisas para restaurar flexibilidad y energía.' },
+                    en: { title: 'Thai Massage', desc: 'Assisted stretching and rhythmic pressure to restore flexibility and energy flow.' }
+                },
+                {
+                    es: { title: 'Reflexología Podal', desc: 'Estimulación de puntos reflejos en los pies para equilibrar el bienestar integral.' },
+                    en: { title: 'Foot Reflexology', desc: 'Targeted foot pressure points that promote holistic balance and deep relaxation.' }
+                },
+                {
+                    es: { title: 'Ritual de Limpieza Facial (Ácido Hialurónico y Vitamina C)', desc: 'Hidratación profunda, luminosidad inmediata y renovación suave de la piel.' },
+                    en: { title: 'Facial Cleansing Ritual (Hyaluronic Acid & Vitamin C)', desc: 'Deep hydration, instant radiance, and gentle skin renewal.' }
+                },
+                {
+                    es: { title: 'Drenaje Linfático', desc: 'Reduce la retención de líquidos y favorece la depuración natural del organismo.' },
+                    en: { title: 'Lymphatic Drainage', desc: 'Reduces fluid retention and supports the body’s natural detoxification.' }
+                }
+            ],
+            home: [
+                {
+                    es: { title: 'Clase de Yoga Chi-Kung Fusión', desc: 'Respiración consciente, movilidad y equilibrio energético guiado en tu espacio.' },
+                    en: { title: 'Yoga Chi-Kung Fusion Class', desc: 'Conscious breathing, gentle mobility, and energy balance guided at your home.' }
+                },
+                {
+                    es: { title: 'Entrenador Personal', desc: 'Sesiones de entrenamiento adaptadas a tus objetivos físicos directamente a domicilio.' },
+                    en: { title: 'Personal Trainer', desc: 'Tailored fitness sessions designed around your goals in the comfort of your home.' }
+                },
+                {
+                    es: { title: 'Masaje a Cuatro Manos', desc: 'Dos terapeutas sincronizados para una experiencia sensorial de máxima relajación.' },
+                    en: { title: 'Four-Hand Massage', desc: 'Two synchronized therapists delivering an immersive, deeply restorative experience.' }
+                },
+                {
+                    es: { title: 'Masaje en Pareja', desc: 'Disfrutad juntos y al mismo tiempo de un masaje personalizado en casa o villa.' },
+                    en: { title: 'Couples Massage', desc: 'Enjoy a simultaneous, tailored massage together in your home or holiday villa.' }
+                },
+                {
+                    es: { title: 'Meditación Guiada', desc: 'Aprende a calmar la mente, reducir la ansiedad y reconectar con el presente.' },
+                    en: { title: 'Guided Meditation', desc: 'Calm your mind, reduce stress, and reconnect with the present moment.' }
+                },
+                {
+                    es: { title: 'Drenaje Linfático a Domicilio', desc: 'Tratamiento suave contra la retención de líquidos sin tener que desplazarte.' },
+                    en: { title: 'At-Home Lymphatic Drainage', desc: 'Gentle fluid-retention relief delivered directly in the comfort of your home.' }
+                }
+            ],
+            complementary: [
+                {
+                    es: { title: 'Auriculoterapia', desc: 'Estimulación de puntos en el pabellón auricular para apoyar el equilibrio interno.' },
+                    en: { title: 'Auriculotherapy', desc: 'Gentle ear-point stimulation to support natural internal balance and relief.' }
+                },
+                {
+                    es: { title: 'Aromaterapia', desc: 'Aceites esenciales puros seleccionados para potenciar la calma y el descanso.' },
+                    en: { title: 'Aromatherapy', desc: 'Pure essential oils tailored to elevate relaxation, mood, and restful sleep.' }
+                },
+                {
+                    es: { title: 'Digitopuntura', desc: 'Presión precisa con los dedos sobre meridianos para aliviar bloqueos y tensiones.' },
+                    en: { title: 'Acupressure', desc: 'Targeted finger pressure along energy meridians to ease tension and blockages.' }
+                },
+                {
+                    es: { title: 'Flores de Bach', desc: 'Esencias florales naturales orientadas al bienestar y equilibrio emocional.' },
+                    en: { title: 'Bach Flowers', desc: 'Natural flower essences designed to support emotional harmony and calm.' }
+                },
+                {
+                    es: { title: 'Moxibustión', desc: 'Aplicación de calor terapéutico tradicional para revitalizar y aliviar molestias.' },
+                    en: { title: 'Moxibustion', desc: 'Traditional warming therapy to revitalize energy and soothe muscular discomfort.' }
+                },
+                {
+                    es: { title: 'Reiki', desc: 'Armonización energética suave que aporta paz interior y serenidad profunda.' },
+                    en: { title: 'Reiki', desc: 'Gentle energy harmonization promoting inner peace and deep serenity.' }
+                },
+                {
+                    es: { title: 'Shiatsu', desc: 'Terapia japonesa de presión rítmica que libera tensiones y equilibra el cuerpo.' },
+                    en: { title: 'Shiatsu', desc: 'Japanese rhythmic pressure therapy that releases tension and restores balance.' }
+                },
+                {
+                    es: { title: 'Ventosas', desc: 'Técnica de descompresión miofascial que mejora el flujo sanguíneo y descarga músculos.' },
+                    en: { title: 'Cupping Therapy', desc: 'Myofascial decompression that boosts blood flow and releases deep muscle tightness.' }
+                }
+            ]
+        };
+
+        /**
+         * Legal Modal Content (ES / EN)
+         */
+        const LEGAL_CONTENT = {
+            legal: {
+                es: {
+                    title: 'Aviso Legal',
+                    paragraphs: [
+                        'Titular: EM Masajes Estepona & Massage at Home.',
+                        'Domicilio profesional: Avda. Marqués del Duero, 19, Urb. Cancelada, 29688 Estepona (Málaga), España.',
+                        'Teléfono de contacto: +34 635 04 72 18.',
+                        'El presente sitio web tiene carácter meramente informativo sobre los servicios de masajes y bienestar ofrecidos en consulta y a domicilio. El acceso y navegación implican la aceptación de las presentes condiciones de uso.'
+                    ]
+                },
+                en: {
+                    title: 'Legal Notice',
+                    paragraphs: [
+                        'Owner: EM Masajes Estepona & Massage at Home.',
+                        'Business address: Avda. Marqués del Duero, 19, Urb. Cancelada, 29688 Estepona (Málaga), Spain.',
+                        'Contact phone: +34 635 04 72 18.',
+                        'This website is purely informational regarding the massage and wellness services offered in our clinic and at home. Accessing and browsing this site implies acceptance of these terms of use.'
+                    ]
+                }
+            },
+            privacy: {
+                es: {
+                    title: 'Política de Privacidad',
+                    paragraphs: [
+                        'Esta página web estática no utiliza cookies publicitarias ni almacena bases de datos personales en servidores propios.',
+                        'Cuando utilizas el formulario de consulta rápida o los botones de WhatsApp, los datos introducidos (nombre, tratamiento y mensaje) se envían directamente desde tu dispositivo a través de la plataforma WhatsApp con el único fin de atender tu solicitud de información o reserva.',
+                        'Puedes ejercer tus derechos de acceso, rectificación o supresión escribiéndonos directamente al +34 635 04 72 18.'
+                    ]
+                },
+                en: {
+                    title: 'Privacy Policy',
+                    paragraphs: [
+                        'This static website does not use advertising cookies and does not store personal data on external web servers.',
+                        'When you use the quick inquiry form or WhatsApp buttons, the details you enter (name, treatment, and message) are sent directly from your device via WhatsApp solely to respond to your booking or information request.',
+                        'You may exercise your data rights (access, rectification, or deletion) at any time by contacting us directly at +34 635 04 72 18.'
+                    ]
+                }
+            },
+            accessibility: {
+                es: {
+                    title: 'Declaración de Accesibilidad',
+                    paragraphs: [
+                        'EM Masajes Estepona se compromete a garantizar la accesibilidad de su sitio web siguiendo criterios de contraste legible, navegación adaptable a dispositivos móviles y estructura semántica clara.',
+                        'Si encuentras alguna barrera de acceso o necesitas asistencia directa para reservar tu tratamiento, puedes llamarnos o escribirnos por WhatsApp al +34 635 04 72 18.'
+                    ]
+                },
+                en: {
+                    title: 'Accessibility Statement',
+                    paragraphs: [
+                        'EM Masajes Estepona is committed to ensuring website accessibility through high-contrast typography, mobile-friendly navigation, and clear semantic structure.',
+                        'If you encounter any accessibility barrier or need direct assistance booking a treatment, please call or message us on WhatsApp at +34 635 04 72 18.'
+                    ]
+                }
+            }
+        };
+
+        /**
+         * Helper to build an encoded WhatsApp URL
+         */
+        function buildWhatsAppUrl(message) {
+            return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        }
+
+        /**
+         * Updates all static WhatsApp CTA links according to active language
+         */
+        function updateWhatsAppLinks() {
+            const t = TRANSLATIONS[currentLang];
+            const generalUrl = buildWhatsAppUrl(t.wa_general);
+
+            ['nav-wa-btn', 'mobile-wa-btn', 'hero-wa-btn', 'contact-wa-btn', 'floating-wa-btn'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.href = generalUrl;
+            });
+
+            const atHomeBtn = document.getElementById('athome-wa-btn');
+            if (atHomeBtn) atHomeBtn.href = buildWhatsAppUrl(t.wa_athome);
+
+            const giftBtn = document.getElementById('gift-wa-btn');
+            if (giftBtn) giftBtn.href = buildWhatsAppUrl(t.wa_gift);
+        }
+
+        /**
+         * Renders the services grid for the currently active category and language
+         */
+        function renderServices() {
+            const grid = document.getElementById('services-grid');
+            const items = SERVICES_DATA[currentCategory] || [];
+            const t = TRANSLATIONS[currentLang];
+
+            grid.innerHTML = items.map((item, idx) => {
+                const content = item[currentLang];
+                const waUrl = buildWhatsAppUrl(`${t.wa_service_prefix}${content.title}.`);
+
+                return `
+                    <article class="service-card-anim group bg-cream rounded-3xl p-6 sm:p-7 border border-sage/10 shadow-card hover:shadow-soft hover:border-gold/45 transition-all duration-300 flex flex-col justify-between" style="animation-delay: ${idx * 35}ms">
+                        <div>
+                            <div class="w-10 h-10 rounded-2xl bg-sage-light/90 text-gold-dark flex items-center justify-center mb-5 group-hover:bg-sage group-hover:text-gold-light transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 3c2.5 3.5 5 6.5 5 10a5 5 0 11-10 0c0-3.5 2.5-6.5 5-10z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-2xl font-semibold text-sage leading-snug group-hover:text-sage-muted transition-colors">
+                                ${content.title}
+                            </h3>
+                            <p class="text-sm text-sage-muted/90 mt-2.5 leading-relaxed font-light">
+                                ${content.desc}
+                            </p>
+                        </div>
+                        <div class="pt-5 mt-5 border-t border-sage/10">
+                            <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gold-dark hover:text-sage transition-colors">
+                                <span>${t.card_cta}</span>
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        /**
+         * Populates the contact form service dropdown in the active language
+         */
+        function populateServiceDropdown() {
+            const select = document.getElementById('input-service');
+            if (!select) return;
+
+            const t = TRANSLATIONS[currentLang];
+            const prevIndex = select.selectedIndex > 0 ? select.selectedIndex : 0;
+
+            let html = `<option value="${t.form_service_general}">${t.form_service_general}</option>`;
+
+            const groups = [
+                { key: 'clinic', label: t.tab_clinic },
+                { key: 'home', label: t.tab_home },
+                { key: 'complementary', label: t.tab_complementary }
+            ];
+
+            groups.forEach(group => {
+                html += `<optgroup label="${group.label}">`;
+                SERVICES_DATA[group.key].forEach(item => {
+                    const title = item[currentLang].title;
+                    html += `<option value="${title}">${title}</option>`;
+                });
+                html += `</optgroup>`;
+            });
+
+            select.innerHTML = html;
+            if (prevIndex < select.options.length) {
+                select.selectedIndex = prevIndex;
+            }
+        }
+
+        /**
+         * Switches the active service category tab
+         */
+        function selectCategory(category) {
+            currentCategory = category;
+
+            const tabs = ['clinic', 'home', 'complementary'];
+            tabs.forEach(tabKey => {
+                const btn = document.getElementById(`tab-${tabKey}`);
+                if (!btn) return;
+                if (tabKey === category) {
+                    btn.className = 'tab-btn px-5 sm:px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-sage text-cream shadow-soft';
+                    btn.setAttribute('aria-selected', 'true');
+                } else {
+                    btn.className = 'tab-btn px-5 sm:px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-cream text-sage border border-sage/15 hover:border-gold';
+                    btn.setAttribute('aria-selected', 'false');
+                }
+            });
+
+            renderServices();
+        }
+
+        /**
+         * Switches the entire page language between ES and EN instantly
+         */
+        function setLanguage(lang) {
+            if (!TRANSLATIONS[lang]) return;
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.title = TRANSLATIONS[lang].page_title;
+
+            // Update language switcher button styles
+            const btnEs = document.getElementById('btn-lang-es');
+            const btnEn = document.getElementById('btn-lang-en');
+            if (lang === 'es') {
+                btnEs.className = 'px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 bg-sage text-cream shadow-sm';
+                btnEn.className = 'px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 text-sage/70 hover:text-sage';
+            } else {
+                btnEn.className = 'px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 bg-sage text-cream shadow-sm';
+                btnEs.className = 'px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 text-sage/70 hover:text-sage';
+            }
+
+            // Update all text elements with data-i18n attributes
+            const t = TRANSLATIONS[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+
+            // Update input placeholders
+            const nameInput = document.getElementById('input-name');
+            const msgInput = document.getElementById('input-message');
+            if (nameInput) nameInput.placeholder = t.form_name_placeholder;
+            if (msgInput) msgInput.placeholder = t.form_msg_placeholder;
+
+            // Hide form error message if visible
+            const feedback = document.getElementById('form-feedback');
+            if (feedback) feedback.classList.add('hidden');
+
+            // Re-render dynamic components
+            updateWhatsAppLinks();
+            renderServices();
+            populateServiceDropdown();
+        }
+
+        /**
+         * Opens the legal information modal in the current language
+         */
+        function openLegalModal(type) {
+            const data = LEGAL_CONTENT[type]?.[currentLang];
+            if (!data) return;
+
+            document.getElementById('legal-modal-title').textContent = data.title;
+            document.getElementById('legal-modal-body').innerHTML = data.paragraphs
+                .map(p => `<p>${p}</p>`)
+                .join('');
+
+            const modal = document.getElementById('legal-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        /**
+         * Closes the legal information modal
+         */
+        function closeLegalModal() {
+            const modal = document.getElementById('legal-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        /**
+         * Initialize interactions on DOM ready
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render in Spanish
+            setLanguage('es');
+
+            // Mobile menu toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconHam = document.getElementById('icon-hamburger');
+            const iconClose = document.getElementById('icon-close');
+
+            function toggleMobileMenu(forceClose = false) {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                if (isOpen || forceClose) {
+                    mobileMenu.classList.add('hidden');
+                    iconHam.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    iconHam.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                    mobileBtn.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            mobileBtn.addEventListener('click', () => toggleMobileMenu());
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => toggleMobileMenu(true));
+            });
+
+            // Quick WhatsApp Inquiry Form handler
+            const form = document.getElementById('quick-wa-form');
+            const feedback = document.getElementById('form-feedback');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('input-name').value.trim();
+                const service = document.getElementById('input-service').value;
+                const message = document.getElementById('input-message').value.trim();
+                const t = TRANSLATIONS[currentLang];
+
+                if (!name) {
+                    feedback.textContent = t.form_err_name;
+                    feedback.classList.remove('hidden');
+                    document.getElementById('input-name').focus();
+                    return;
+                }
+
+                feedback.classList.add('hidden');
+
+                let formattedMsg = '';
+                if (currentLang === 'es') {
+                    formattedMsg = `Hola, soy ${name}.\nMe interesa: ${service}.`;
+                    if (message) formattedMsg += `\nMensaje: ${message}`;
+                } else {
+                    formattedMsg = `Hello, my name is ${name}.\nI am interested in: ${service}.`;
+                    if (message) formattedMsg += `\nMessage: ${message}`;
+                }
+
+                const url = buildWhatsAppUrl(formattedMsg);
+                window.open(url, '_blank', 'noopener,noreferrer');
+            });
+
+            // Close modal on backdrop click or Escape key
+            const modal = document.getElementById('legal-modal');
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeLegalModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeLegalModal();
+                }
+            });
+
+            // Subtle scroll-reveal observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-card');
+                } else {
+                    navbar.classList.remove('shadow-card');
+                }
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>
